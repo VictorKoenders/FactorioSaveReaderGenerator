@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using Parser;
 
 namespace Main
 {
@@ -6,9 +7,11 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            string fileContents = File.ReadAllText("D:\\Development\\C++\\Factorio\\src\\Entity\\Accumulator.cpp");
-            var tokens = Tokenizer.Tokenizer.Parse(fileContents);
-            string serialized = Newtonsoft.Json.JsonConvert.SerializeObject(tokens);
+            /*string fileContents = File.ReadAllText();
+            List<Token> tokens = Tokenizer.Tokenizer.Parse(fileContents);
+            string serialized = Newtonsoft.Json.JsonConvert.SerializeObject(tokens);*/
+
+            List<Statement> statements = Parser.Parser.Parse("D:\\Development\\C++\\Factorio\\src\\", "Entity\\Accumulator.cpp");
         }
     }
 }

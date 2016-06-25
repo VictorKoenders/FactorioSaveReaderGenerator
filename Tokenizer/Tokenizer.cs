@@ -9,8 +9,15 @@ namespace Tokenizer
         private static List<Token> Parse(string data, ref int offset)
         {
             List<Token> result = new List<Token>();
+
+            Dictionary<string, string> ignoredBlockEnds = new Dictionary<string, string>
+            {
+                { "'", "'" },
+                { "\"", "\"" },
+                { "/*", "*/" },
+            };
             string buffer = "";
-            char stringToken = '\0';
+            string blockToken = "";
             bool isHashLine = false;
 
             Action addAndFlushBuffer = () =>
@@ -47,23 +54,25 @@ namespace Tokenizer
             for (; offset < data.Length; offset++)
             {
                 char c = data[offset];
-                if (c == '"' || c == '\'')
+                if (c == '/' && offset < data.Length - 1 && data[offset + 1] == '/')
                 {
-                    buffer += c;
-                    if (offset == 0 || data[offset - 1] != '\\')
-                    {
-                        if (stringToken == c)
-                        {
-                            stringToken = '\0';
-                        }
-                        else if (stringToken == '\0')
-                        {
-                            stringToken = c;
-                        }
-                    }
+                    while (data[offset] != '\n' && offset < data.Length) offset++;
+                    offset --;
                     continue;
                 }
-                if (stringToken != '\0')
+
+                foreach (KeyValuePair<string, string> block in ignoredBlockEnds)
+                {
+                    if (blockToken == "" && data.Length > offset + block.Key.Length && data.Substring(offset, block.Key.Length) == block.Key)
+                    {
+                        blockToken = block.Key;
+                    }
+                    if (blockToken == block.Key && data.Length > offset + block.Value.Length && data.Substring(offset, block.Value.Length) == block.Value)
+                    {
+                        blockToken = "";
+                    }
+                }
+                if (blockToken != "")
                 {
                     buffer += c;
                     continue;
@@ -72,7 +81,7 @@ namespace Tokenizer
                 if (c == '#')
                 {
                     bool isFirstCharOnLine = true;
-                    for (int i = offset - 1; i >= 0; i++)
+                    for (int i = offset - 1; i >= 0; i--)
                     {
                         if (data[i] != '\t' && data[i] != ' ') continue;
                         if (data[i] == '\n')

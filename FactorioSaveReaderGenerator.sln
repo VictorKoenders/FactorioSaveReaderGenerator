@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tokenizer", "Tokenizer\Toke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Main\Main.csproj", "{76652875-5435-415D-8323-3291191C7C7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "Parser\Parser.csproj", "{0963C29A-F75C-4E07-8844-025F778D0FCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{76652875-5435-415D-8323-3291191C7C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76652875-5435-415D-8323-3291191C7C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76652875-5435-415D-8323-3291191C7C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0963C29A-F75C-4E07-8844-025F778D0FCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0963C29A-F75C-4E07-8844-025F778D0FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0963C29A-F75C-4E07-8844-025F778D0FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0963C29A-F75C-4E07-8844-025F778D0FCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
